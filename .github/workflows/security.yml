@@ -1,0 +1,17 @@
+name: Dependency-Track sample scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  security:
+    uses: opsbento/sec-workflows-repo/.github/workflows/trivy.yml@main
+    with:
+      dependency_track_url: ${{ vars.DEPENDENCY_TRACK_URL }}
+      project_name: dtrack-sample-python
+      project_version: main
+    secrets:
+      dependency_track_api_key: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
